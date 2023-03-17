@@ -8,4 +8,4 @@ def get_recipe_price(prices, optionals=None, **args):
                 print(f"Must receive the amount of grams you want to purchase from {ingredient}")
                 return None
             sum_payment += args[ingredient] / 100 * price_for_100g
-    print(sum_payment)
+    return sum_payment
