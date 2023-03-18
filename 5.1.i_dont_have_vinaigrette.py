@@ -4,6 +4,9 @@ import random
 
 
 def get_date():
+    """
+    :return: a datetime date
+    """
     date = input("Enter a date: ")
     try:
         # %Y - checks if the year is in the format YYYY
@@ -15,6 +18,11 @@ def get_date():
 
 
 def get_random_date_in_middle(date1, date2):
+    """
+    :param date1: datetime date
+    :param date2: datetime date
+    :return: a datetime date between both dates
+    """
     epoch1 = date1.timestamp()
     epoch2 = date2.timestamp()
     start, end = (epoch1, epoch2) if (epoch1 < epoch2) else (epoch2, epoch1)
