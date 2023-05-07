@@ -6,26 +6,35 @@ def interleave_gen(iterable):
         yield i
 
 
-def interleave(*args):
+def interleave(*iterables):
     """
-    :param args: collection of iterables
-    :return: list of the iterables' elements
+    Combining the elements of the iterables in an alternating pattern, first elements then second elements and so on.
+    :param iterables: collection of iterables
+    :return: interleave the gives iterables.
     """
-    gen_list = []
     comb_list = []
-    sum_len = 0
-    # creates a generator for every arg
-    for arg in args:
-        sum_len += len(arg)
-        gen_list.append(interleave_gen(arg))
-    i = 0
+    sum_len = sum([len(i) for i in iterables])
+    # creates a generator for every iterable
+    gen_list = [interleave_gen(i) for i in iterables]
+
     gen_idx = 0
+    i = 0
     # extract the current element from the generator
     # if reached the end of the generator (None value) then move to the next generator
     while i < sum_len:
-        element = next(gen_list[gen_idx % len(args)], None)
+        element = next(gen_list[gen_idx % len(iterables)], None)
         if element is not None:
             comb_list.append(element)
             i += 1
         gen_idx += 1
+
     return comb_list
+
+
+def main():
+    print(interleave('abc', [1, 2, 3], ('!', '@', '#')))
+    print(interleave('abcd', [1, 2, 3]))
+
+
+if __name__ == "__main__":
+    main()
